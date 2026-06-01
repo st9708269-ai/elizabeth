@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viatours - Full Landing Page</title>
+    <link href="головне фото.png" rel="stylesheet">
+    <style>
+        /* ================= БАЗОВІ НАЛАШТУВАННЯ ================= */
+        :root {
+            --primary-color: #111827;
+            --secondary-color: #6b7280;
+            --accent-color: #eb662b;
+            --dark-bg: #0a1128;
+            --light-bg: #fffaf7;
+            --border-color: #f3f4f6;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: #ffffff; color: var(--primary-color); line-height: 1.5; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        
+        .container { width: 95%; max-width: 1200px; margin: 0 auto; }
+        .section-padding { padding: 80px 0; }
+        
+        .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 30px; }
+        .section-title { font-size: 28px; font-weight: 700; color: var(--primary-color); }
+        .see-all { font-size: 14px; color: var(--secondary-color); font-weight: 500; transition: color 0.3s; }
+        .see-all:hover { color: var(--accent-color); }
+
+        /* ================= 1. HERO SECTION ================= */
+        .hero { position: relative; width: 95%; max-width: 1400px; height: 650px; margin: 20px auto; border-radius: 24px; overflow: hidden; background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5)), url('головне фото.png') center/cover no-repeat; color: #fff; display: flex; flex-direction: column; }
+        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 30px 50px; font-size: 14px; }
+        .logo { font-size: 24px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
+        .logo svg { width: 24px; height: 24px; fill: #fff; }
+        .nav-links { display: flex; gap: 30px; font-weight: 500; }
+        .nav-links li:first-child { color: #ffb703; }
+        .nav-actions { display: flex; align-items: center; gap: 20px; font-weight: 500; }
+        .btn-login { background: transparent; color: #fff; border: 1px solid rgba(255, 255, 255, 0.5); padding: 8px 20px; border-radius: 20px; cursor: pointer; font-weight: 500; transition: 0.3s; }
+        .btn-login:hover { background: #fff; color: #000; }
+        .hero-content { display: flex; justify-content: space-between; align-items: center; flex-grow: 1; padding: 0 80px; }
+        .hero-text { max-width: 550px; }
+        .hero-price { font-size: 14px; font-weight: 500; margin-bottom: 15px; display: block; text-transform: uppercase; letter-spacing: 1px; }
+        .hero-title { font-size: 56px; line-height: 1.1; font-weight: 700; margin-bottom: 20px; }
+        .hero-desc { font-size: 16px; line-height: 1.6; color: #e5e7eb; margin-bottom: 40px; }
+        .btn-view-tour { background: transparent; color: #fff; border: 1px solid #fff; padding: 14px 32px; border-radius: 30px; cursor: pointer; font-weight: 500; font-size: 14px; transition: 0.3s; }
+        .btn-view-tour:hover { background: #fff; color: #000; }
+        .hero-timeline { position: relative; text-align: right; font-size: 12px; }
+        .timeline-svg { width: 350px; height: auto; margin-top: 10px; }
+
+        /* ================= 2. TRENDING DESTINATIONS ================= */
+        .dest-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        .dest-card { display: flex; align-items: center; padding: 15px; border: 1px solid var(--border-color); border-radius: 16px; background: #fff; transition: 0.3s; cursor: pointer; }
+        .dest-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); border-color: transparent; }
+        .dest-card img { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; margin-right: 15px; }
+        .dest-info h4 { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+        .dest-info p { font-size: 13px; color: var(--secondary-color); }
+
+        /* ================= 3. FEATURED TRIPS ================= */
+        .trips-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+        .trip-card { position: relative; height: 400px; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; padding: 20px; color: #fff; background-size: cover; background-position: center; cursor: pointer; }
+        .trip-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 70%; background: linear-gradient(to top, rgba(15, 23, 42, 0.95), transparent); z-index: 1; }
+        .trip-content-top, .trip-content-bottom { position: relative; z-index: 2; }
+        .trip-content-top { display: flex; justify-content: space-between; align-items: center; }
+        .trip-duration { font-size: 13px; font-weight: 500; background: rgba(0,0,0,0.3); padding: 4px 10px; border-radius: 20px; backdrop-filter: blur(4px); }
+        .fav-btn { width: 36px; height: 36px; background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(4px); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .trip-content-bottom { display: flex; flex-direction: column; gap: 8px; }
+        .trip-location { font-size: 12px; color: #d1d5db; }
+        .trip-title { font-size: 18px; font-weight: 600; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .trip-footer { display: flex; justify-content: space-between; align-items: flex-end; margin-top: 5px; }
+        .trip-rating { font-size: 13px; display: flex; align-items: center; gap: 4px; color: #e5e7eb; }
+        .star { color: #facc15; font-size: 16px; }
+        .trip-price { text-align: right; font-size: 12px; color: #d1d5db; }
+        .trip-price strong { display: block; font-size: 18px; font-weight: 700; color: #fff; margin-top: 2px; }
+        .carousel-nav { display: flex; gap: 12px; margin-top: 30px; }
+        .nav-btn { width: 48px; height: 48px; border: 1px solid var(--border-color); border-radius: 50%; background: #fff; cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; }
+        .nav-btn:hover { background: var(--primary-color); stroke: #fff; }
+        .nav-btn:hover svg path { stroke: #fff; }
+
+        /* ================= 4. WHY CHOOSE US ================= */
+        .why-choose { background-color: var(--light-bg); padding: 60px 0; border-radius: 24px; margin: 40px auto; width: 95%; max-width: 1400px; display: flex; align-items: center; position: relative; }
+        .why-img-container { width: 40%; height: 500px; border-radius: 0 24px 24px 0; overflow: hidden; }
+        .why-img-container img { width: 100%; height: 100%; object-fit: cover; }
+        .why-content { width: 60%; padding: 0 60px; }
+        .why-content h2 { font-size: 32px; font-weight: 700; margin-bottom: 10px; }
+        .why-content p.subtitle { color: var(--secondary-color); margin-bottom: 40px; font-size: 15px; }
+        .why-grid { display: flex; gap: 20px; }
+        .why-card { background: #fff; padding: 30px 20px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); flex: 1; }
+        .why-icon { width: 50px; height: 50px; background: #fff0e6; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; color: var(--accent-color); font-size: 24px; }
+        .why-card h4 { font-size: 16px; font-weight: 600; margin-bottom: 10px; }
+        .why-card p { font-size: 13px; color: var(--secondary-color); line-height: 1.5; }
+
+        /* ================= 5. POPULAR THINGS TO DO ================= */
+        .things-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 15px; }
+        .thing-card { position: relative; border-radius: 12px; overflow: hidden; height: 200px; display: flex; align-items: flex-end; padding: 15px; color: #fff; text-decoration: none; }
+        .thing-card img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+        .thing-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); z-index: 1; }
+        .thing-card h4 { position: relative; z-index: 2; font-size: 15px; font-weight: 600; }
+
+        /* ================= 6. OUR FOOTPRINTS ================= */
+        .footprints { background-color: var(--light-bg); padding: 80px 0; border-top: 1px solid #fce8e0; border-bottom: 1px solid #fce8e0; }
+        .stats-grid { display: flex; justify-content: space-around; text-align: center; }
+        .stat-item .icon { color: var(--accent-color); font-size: 32px; margin-bottom: 15px; }
+        .stat-item h3 { font-size: 40px; font-weight: 700; color: var(--primary-color); margin-bottom: 5px; }
+        .stat-item p { font-size: 14px; color: var(--secondary-color); }
+
+        /* ================= 7. EXPLORE MORE ================= */
+        .explore-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+        .explore-card { border: 1px solid var(--border-color); border-radius: 16px; overflow: hidden; transition: 0.3s; cursor: pointer; }
+        .explore-card:hover { box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+        .explore-img { height: 200px; width: 100%; object-fit: cover; }
+        .explore-info { padding: 20px; }
+        .explore-loc { font-size: 12px; color: var(--secondary-color); margin-bottom: 8px; display: block; }
+        .explore-title { font-size: 16px; font-weight: 600; margin-bottom: 15px; line-height: 1.4; }
+        .explore-meta { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-color); padding-top: 15px; }
+        .explore-meta .rating { font-size: 13px; font-weight: 500; }
+        .explore-meta .price { font-size: 14px; font-weight: 700; }
+
+        /* ================= 8. TESTIMONIALS & PARTNERS ================= */
+        .testimonials-section { background-color: var(--dark-bg); padding: 80px 0; color: #fff; margin-top: 60px; }
+        .testi-content { display: flex; justify-content: space-between; align-items: center; gap: 50px; margin-bottom: 80px; }
+        .testi-left { flex: 1; max-width: 400px; }
+        .testi-left h2 { font-size: 36px; font-weight: 700; margin-bottom: 40px; line-height: 1.2; }
+        .testi-stats { display: flex; gap: 40px; }
+        .testi-stat h3 { font-size: 32px; font-weight: 700; margin-bottom: 5px; }
+        .testi-stat p { font-size: 14px; color: #9ca3af; }
+        .testi-right { flex: 1; }
+        .testi-card { background: #fff; color: var(--primary-color); padding: 40px; border-radius: 20px; position: relative; }
+        .testi-text { font-size: 18px; line-height: 1.6; font-style: italic; margin-bottom: 30px; }
+        .testi-author { display: flex; align-items: center; gap: 15px; }
+        .testi-author img { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; }
+        .testi-author h4 { font-size: 16px; font-weight: 700; margin-bottom: 2px; }
+        .testi-author p { font-size: 13px; color: var(--secondary-color); }
+        .partners { display: flex; justify-content: space-between; align-items: center; opacity: 0.5; filter: grayscale(100%) brightness(200%); }
+        .partners img { height: 30px; object-fit: contain; }
+
+        /* ================= 9. TRAVEL ARTICLES ================= */
+        .articles-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .article-card { cursor: pointer; }
+        .article-card img { width: 100%; height: 250px; object-fit: cover; border-radius: 16px; margin-bottom: 20px; }
+        .article-meta { font-size: 13px; color: var(--secondary-color); margin-bottom: 10px; }
+        .article-title { font-size: 18px; font-weight: 600; line-height: 1.4; transition: color 0.3s; }
+        .article-card:hover .article-title { color: var(--accent-color); }
+
+        /* ================= 10. FOOTER ================= */
+        footer { border-top: 1px solid var(--border-color); padding-top: 60px; margin-top: 40px; }
+        .footer-top { display: flex; justify-content: space-between; margin-bottom: 40px; }
+        .footer-brand h2 { font-size: 24px; font-weight: 700; margin-bottom: 10px; }
+        .footer-brand p { font-size: 14px; color: var(--secondary-color); }
+        .footer-support { text-align: right; }
+        .footer-support p { font-size: 14px; color: var(--secondary-color); }
+        .footer-support h3 { font-size: 20px; font-weight: 700; margin-top: 5px; }
+        
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 2fr; gap: 40px; margin-bottom: 60px; }
+        .footer-col h4 { font-size: 16px; font-weight: 600; margin-bottom: 20px; }
+        .footer-col ul { display: flex; flex-direction: column; gap: 12px; }
+        .footer-col a { font-size: 14px; color: var(--secondary-color); transition: 0.3s; }
+        .footer-col a:hover { color: var(--accent-color); }
+        .newsletter p { font-size: 14px; color: var(--secondary-color); margin-bottom: 15px; }
+        .newsletter-form { display: flex; gap: 10px; }
+        .newsletter-form input { flex: 1; padding: 12px 15px; border: 1px solid var(--border-color); border-radius: 8px; outline: none; }
+        .newsletter-form button { background: var(--primary-color); color: #fff; border: none; padding: 0 20px; border-radius: 8px; cursor: pointer; font-weight: 500; }
+        
+        .footer-bottom { border-top: 1px solid var(--border-color); padding: 20px 0; display: flex; justify-content: space-between; align-items: center; font-size: 14px; color: var(--secondary-color); }
+        .payment-icons { display: flex; gap: 10px; }
+
+        /* ================= RESPONSIVE ================= */
+        @media (max-width: 1024px) {
+            .dest-grid, .trips-grid, .explore-grid { grid-template-columns: repeat(3, 1fr); }
+            .trip-card:nth-child(4), .explore-card:nth-child(4) { display: none; }
+            .things-grid { grid-template-columns: repeat(3, 1fr); }
+            .why-choose { flex-direction: column; }
+            .why-img-container, .why-content { width: 100%; }
+            .why-img-container { height: 300px; border-radius: 24px 24px 0 0; }
+            .why-content { padding: 40px 20px; }
+            .footer-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links, .nav-actions, .hero-timeline { display: none; }
+            .hero-content { flex-direction: column; text-align: center; padding: 0 20px; justify-content: center; }
+            .hero-title { font-size: 40px; }
+            .dest-grid, .trips-grid, .explore-grid { grid-template-columns: repeat(2, 1fr); }
+            .trip-card:nth-child(3), .explore-card:nth-child(3) { display: none; }
+            .why-grid { flex-direction: column; }
+            .stats-grid { flex-wrap: wrap; gap: 30px; }
+            .stat-item { width: 40%; }
+            .testi-content { flex-direction: column; text-align: center; }
+            .testi-stats { justify-content: center; }
+            .partners { flex-wrap: wrap; justify-content: center; gap: 20px; }
+            .articles-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 480px) {
+            .dest-grid, .trips-grid, .explore-grid, .things-grid, .footer-grid { grid-template-columns: 1fr; }
+            .stat-item { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <nav class="navbar">
+            <div class="logo">
+                <svg viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2zm0 6l5 10H7l5-10z"/></svg>
+                viatours
+            </div>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Tour</a></li>
+                <li><a href="#">Destination</a></li>
+                <li><a href="#">Activities</a></li>
+                <li><a href="#">Pages</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <span>USD</span>
+                <span>Sign up</span>
+                <button class="btn-login">Log in</button>
+            </div>
+        </nav>
+
+        <div class="hero-content">
+            <div class="hero-text">
+                <span class="hero-price">Starting at $978</span>
+                <h1 class="hero-title">Iceland's legendary<br>Golden Circle</h1>
+                <p class="hero-desc">Enjoy a full-day bus tour of Iceland's legendary Golden Circle.<br>Soak in the warm thermal waters of the Secret Lagoon.</p>
+                <button class="btn-view-tour">View Tour</button>
+            </div>
+            <div class="hero-timeline">
+                <div>Day 1<br>Secret Lagoon</div>
+                <svg class="timeline-svg" viewBox="0 0 300 50">
+                    <path d="M10,25 C40,25 50,10 80,10 C110,10 120,40 150,40 C180,40 190,20 220,20 C250,20 260,25 290,25" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2"/>
+                    <circle cx="10" cy="25" r="4" fill="#fff"/><circle cx="80" cy="10" r="3" fill="#fff"/><circle cx="150" cy="40" r="3" fill="#fff"/><circle cx="220" cy="20" r="3" fill="#fff"/><circle cx="290" cy="25" r="4" fill="#fff"/>
+                </svg>
+                <div style="margin-top: 5px;">Day 4<br>Gullfoss Waterfall</div>
+            </div>
+        </div>
+    </header>
+
+    <section class="container section-padding">
+        <div class="section-header">
+            <h2 class="section-title">Trending destinations</h2>
+            <a href="#" class="see-all">See all</a>
+        </div>
+        <div class="dest-grid">
+            <div class="dest-card"><img src="париж.png" alt="Paris"><div class="dest-info"><h4>Paris</h4><p>100+ Tours</p></div></div>
+            <div class="dest-card"><img src="images/сінгапур.png" alt="Singapore"><div class="dest-info"><h4>Singapore</h4><p>300+ Tours</p></div></div>
+            <div class="dest-card"><img src="румунія.png" alt="Roma"><div class="dest-info"><h4>Roma</h4><p>400+ Tours</p></div></div>
+            <div class="dest-card"><img src="images/бангкок.png" alt="Bangkok"><div class="dest-info"><h4>Bangkok</h4><p>100+ Tours</p></div></div>
+            <div class="dest-card"><img src="images/балі.png" alt="Bali"><div class="dest-info"><h4>Bali</h4><p>600+ Tours</p></div></div>
+            <div class="dest-card"><img src="images/пхукет.png" alt="Phuket"><div class="dest-info"><h4>Phuket</h4><p>200+ Tours</p></div></div>
+            <div class="dest-card"><img src="images/токіо.png" alt="Tokyo"><div class="dest-info"><h4>Tokyo</h4><p>700+ Tours</p></div></div>
+            <div class="dest-card"><img src="images/кападокіа.png" alt="Cappadocia"><div class="dest-info"><h4>Cappadocia</h4><p>900+ Tours</p></div></div>
+        </div>
+    </section>
+
+    <section class="container" style="padding-bottom: 80px;">
+        <h2 class="section-title" style="margin-bottom: 30px;">Featured Trips</h2>
+        <div class="trips-grid">
+            <div class="trip-card" style="background-image: url('images/1.1.jpg');">
+                <div class="trip-content-top"><span class="trip-duration">4 days</span><div class="fav-btn">♡</div></div>
+                <div class="trip-content-bottom">
+                    <span class="trip-location">Paris, France</span>
+                    <h3 class="trip-title">Centipede Tour - Guided Arizona Desert Tour by ATV</h3>
+                    <div class="trip-footer">
+                        <div class="trip-rating"><span class="star">★</span> 4.8 (243)</div>
+                        <div class="trip-price">From <strong>$189.25</strong></div>
+                    </div>
+                </div>
+            </div>
+            <div class="trip-card" style="background-image: url('images/1.2.jpg');">
+                <div class="trip-content-top"><span class="trip-duration">4 days</span><div class="fav-btn">♡</div></div>
+                <div class="trip-content-bottom">
+                    <span class="trip-location">New York, USA</span>
+                    <h3 class="trip-title">Molokini and Turtle Town Snorkeling Adventure Aboard</h3>
+                    <div class="trip-footer">
+                        <div class="trip-rating"><span class="star">★</span> 4.8 (243)</div>
+                        <div class="trip-price">From <strong>$225</strong></div>
+                    </div>
+                </div>
+            </div>
+            <div class="trip-card" style="background-image: url('images/1.3.jpg');">
+                <div class="trip-content-top"><span class="trip-duration">4 days</span><div class="fav-btn">♡</div></div>
+                <div class="trip-content-bottom">
+                    <span class="trip-location">London, UK</span>
+                    <h3 class="trip-title">Westminster Walking Tour & Westminster Abbey Entry</h3>
+                    <div class="trip-footer">
+                        <div class="trip-rating"><span class="star">★</span> 4.8 (243)</div>
+                        <div class="trip-price">From <strong>$943</strong></div>
+                    </div>
+                </div>
+            </div>
+            <div class="trip-card" style="background-image: url('images/1.4.jpg');">
+                <div class="trip-content-top"><span class="trip-duration">4 days</span><div class="fav-btn">♡</div></div>
+                <div class="trip-content-bottom">
+                    <span class="trip-location">New York, USA</span>
+                    <h3 class="trip-title">All Inclusive Ultimate Circle Island Day Tour with Lunch</h3>
+                    <div class="trip-footer">
+                        <div class="trip-rating"><span class="star">★</span> 4.8 (243)</div>
+                        <div class="trip-price">From <strong>$143</strong></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-nav">
+            <button class="nav-btn"><svg width="20" height="20" fill="none" stroke="#333" stroke-width="2" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <button class="nav-btn"><svg width="20" height="20" fill="none" stroke="#333" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+    </section>
+
+    <section class="why-choose">
+        <div class="why-img-container">
+            <img src="images/2.1.png" alt="Hot air balloons">
+        </div>
+        <div class="why-content">
+            <h2>Why choose Tourz?</h2>
+            <p class="subtitle">There are many variations of passages of Lorem Ipsum</p>
+            <div class="why-grid">
+                <div class="why-card">
+                    <div class="why-icon">🎫</div>
+                    <h4>Ultimate flexibility</h4>
+                    <p>You're in control, with free cancellation and payment options to satisfy any plan or budget.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">🌟</div>
+                    <h4>Memorable experiences</h4>
+                    <p>Browse and book tours and activities so incredible, you'll want to tell your friends.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">💎</div>
+                    <h4>Quality at our core</h4>
+                    <p>High quality standards. Millions of reviews. A Tourz company.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container section-padding">
+        <div class="section-header">
+            <h2 class="section-title">Popular things to do</h2>
+            <a href="#" class="see-all">See all</a>
+        </div>
+        <div class="things-grid">
+            <a href="#" class="thing-card">
+                <img src="images/3.1.jpg" alt="Cruises">
+                <h4>Cruises and Boat Tours</h4>
+            </a>
+            <a href="#" class="thing-card">
+                <img src="images/3.2.jpg" alt="Walking">
+                <h4>Walking & Biking Tours</h4>
+            </a>
+            <a href="#" class="thing-card">
+                <img src="images/3.3.jpg" alt="Water">
+                <h4>Water Sports</h4>
+            </a>
+            <a href="#" class="thing-card">
+                <img src="images/3.4.jpg" alt="Nature">
+                <h4>Nature and Wildlife</h4>
+            </a>
+            <a href="#" class="thing-card">
+                <img src="images/3.5.jpg" alt="Culture">
+                <h4>Cultural & History</h4>
+            </a>
+            <a href="#" class="thing-card">
+                <img src="images/3.6.jpg" alt="Food">
+                <h4>Food & Drink</h4>
+            </a>
+        </div>
+    </section>
+
+    <section class="footprints">
+        <div class="container">
+            <h2 class="section-title" style="text-align: center; margin-bottom: 50px;">Our Footprints</h2>
+            <div class="stats-grid">
+                <div class="stat-item"><div class="icon">🎟️</div><h3>932M</h3><p>Total Bookings</p></div>
+                <div class="stat-item"><div class="icon">🌍</div><h3>24M</h3><p>Partners Tours</p></div>
+                <div class="stat-item"><div class="icon">💬</div><h3>10M</h3><p>Total Reviews</p></div>
+                <div class="stat-item"><div class="icon">🏖️</div><h3>65M</h3><p>Active Users</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container section-padding">
+        <div class="section-header">
+            <h2 class="section-title">Explore more</h2>
+            <a href="#" class="see-all">See all</a>
+        </div>
+        <div class="explore-grid">
+            <div class="explore-card">
+                <img class="explore-img" src="images/1.2.jpg" alt="Tour">
+                <div class="explore-info">
+                    <span class="explore-loc">Phuket, Thailand</span>
+                    <h3 class="explore-title">Phuket: Phi Phi, Maya, Bamboo, and Maiton Island Day Trip</h3>
+                    <div class="explore-meta">
+                        <span class="rating"><span class="star">★</span> 4.8 (243)</span>
+                        <span class="price">From $20</span>
+                    </div>
+                </div>
+            </div>
+            <div class="explore-card">
+                <img class="explore-img" src="images/1.4.jpg" alt="Tour">
+                <div class="explore-info">
+                    <span class="explore-loc">Phuket, Thailand</span>
+                    <h3 class="explore-title">Phuket: Maya, Bamboo, and Maiton Island Speedboat Tour</h3>
+                    <div class="explore-meta">
+                        <span class="rating"><span class="star">★</span> 4.8 (243)</span>
+                        <span class="price">From $20</span>
+                    </div>
+                </div>
+            </div>
+            <div class="explore-card">
+                <img class="explore-img" src="images/4.1.png" alt="Tour">
+                <div class="explore-info">
+                    <span class="explore-loc">Phuket, Thailand</span>
+                    <h3 class="explore-title">From Phuket: Similan Islands Early Bird Day Tour</h3>
+                    <div class="explore-meta">
+                        <span class="rating"><span class="star">★</span> 4.8 (243)</span>
+                        <span class="price">From $20</span>
+                    </div>
+                </div>
+            </div>
+            <div class="explore-card">
+                <img class="explore-img" src="images/4.2.png" alt="Tour">
+                <div class="explore-info">
+                    <span class="explore-loc">Phang Nga, Thailand</span>
+                    <h3 class="explore-title">Phang Nga Bay: Early Bird James Bond & Beyond Tour</h3>
+                    <div class="explore-meta">
+                        <span class="rating"><span class="star">★</span> 4.8 (243)</span>
+                        <span class="price">From $20</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials-section">
+        <div class="container">
+            <div class="testi-content">
+                <div class="testi-left">
+                    <h2>What our travelers<br>are saying</h2>
+                    <div class="testi-stats">
+                        <div class="testi-stat"><h3>4.8</h3><p>Average rating on 10,000+ reviews</p></div>
+                        <div class="testi-stat"><h3>16M</h3><p>Total Reviews</p></div>
+                    </div>
+                </div>
+                <div class="testi-right">
+                    <div class="testi-card">
+                        <p class="testi-text">"I couldn't have asked for a better experience. The guide was fantastic, the itinerary was perfectly paced, and the sights were breathtaking. Will definitely use Tourz again!"</p>
+                        <div class="testi-author">
+                            <img src="images/5.1.png" alt="Courtney">
+                            <div>
+                                <h4>Courtney Henry</h4>
+                                <p>Web Designer</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="partners">
+                <h3>amazon</h3>
+                <h3>AMD</h3>
+                <h3>CISCO</h3>
+                <h3>dropcam</h3>
+                <h3>logitech</h3>
+                <h3>Spotify</h3>
+            </div>
+        </div>
+    </section>
+
+    <section class="container section-padding">
+        <div class="section-header">
+            <h2 class="section-title">Travel Articles</h2>
+            <a href="#" class="see-all">See all</a>
+        </div>
+        <div class="articles-grid">
+            <div class="article-card">
+                <img src="images/6.1.jpg" alt="Blog">
+                <p class="article-meta">April 06, 2023 • By Admin</p>
+                <h3 class="article-title">10 European destinations you need to visit this summer</h3>
+            </div>
+            <div class="article-card">
+                <img src="images/6.2.jpg" alt="Blog">
+                <p class="article-meta">April 06, 2023 • By Admin</p>
+                <h3 class="article-title">National Park changes: What you need to know</h3>
+            </div>
+            <div class="article-card">
+                <img src="images/6.3.jpg" alt="Blog">
+                <p class="article-meta">April 06, 2023 • By Admin</p>
+                <h3 class="article-title">The best destinations for an eco-friendly holiday</h3>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <h2>viatours</h2>
+                    <p>Speak to our expert at<br><strong>1-800-453-6744</strong></p>
+                </div>
+                <div class="footer-support">
+                    <p>Customer Support</p>
+                    <h3>help@viatours.com</h3>
+                </div>
+            </div>
+            
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul><li><a href="#">About Us</a></li><li><a href="#">Careers</a></li><li><a href="#">Blog</a></li><li><a href="#">Press</a></li><li><a href="#">Gift Cards</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Support</h4>
+                    <ul><li><a href="#">Contact</a></li><li><a href="#">Legal Notice</a></li><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms and Conditions</a></li><li><a href="#">Sitemap</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Other Services</h4>
+                    <ul><li><a href="#">Car hire</a></li><li><a href="#">Activity Finder</a></li><li><a href="#">Tour List</a></li><li><a href="#">Flight finder</a></li><li><a href="#">Cruise Ticket</a></li></ul>
+                </div>
+                <div class="footer-col newsletter">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe to the free newsletter and stay up to date.</p>
+                    <div class="newsletter-form">
+                        <input type="email" placeholder="Your email address">
+                        <button>Send</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2023 Viatours LLC. All rights reserved.</p>
+                <div class="payment-icons">
+                    <span>💳 Visa</span>
+                    <span>💳 Mastercard</span>
+                    <span>💳 PayPal</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,109 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+.hero {
+    height: 100vh;
+    background: url('головне фото.png') center/cover no-repeat;
+    position: relative;
+    color: white;
+}
+
+.overlay {
+    background: rgba(0,0,0,0.5);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.hero button {
+    padding: 12px 25px;
+    border: none;
+    background-color: #00aaff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+/* Загальні контейнери */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+h2 {
+    font-size: 32px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* Секція напрямків */
+.destinations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+}
+
+.dest-card {
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.dest-card img {
+    width: 100%;
+    border-radius: 50%; /* Круглі фото як у дизайні */
+    aspect-ratio: 1/1;
+    object-fit: cover;
+}
+
+.dest-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Секція "Why Us" */
+.why-container {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    background-color: #fff9f5; /* Світлий фон як у Figma */
+}
+
+.why-image img {
+    width: 100%;
+    border-radius: 20px;
+}
+
+.benefit {
+    margin-bottom: 20px;
+}
+
+.benefit h3 {
+    color: #05073C; /* Темно-синій колір з твого Figma */
+    margin-bottom: 5px;
+}
+
+/* Синя секція з відгуками (нижня частина) */
+.stats-section {
+    background-color: #05073C;
+    color: white;
+    padding: 60px 0;
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.stat-item h2 {
+    font-size: 40px;
+    margin: 0;
+}
